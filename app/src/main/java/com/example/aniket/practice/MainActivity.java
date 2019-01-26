@@ -28,8 +28,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listview);
 
-        getListViewItem();
-
         listView = findViewById(R.id.listView);
         button = findViewById(R.id.btnAppend);
         editText = findViewById(R.id.editText);
@@ -49,8 +47,12 @@ public class MainActivity extends Activity {
                 countries = editText.getText().toString();
 
                 if (!countries.isEmpty()) {
-                    arrayList.add(countries);
-
+                    if (arrayList.contains(countries))
+                    {
+                        Toast.makeText(MainActivity.this,countries+" already exist!",Toast.LENGTH_SHORT).show();
+                    } else {
+                        arrayList.add(countries);
+                    }
                     arrayAdapter.notifyDataSetChanged();
 
                 } else {
@@ -63,16 +65,4 @@ public class MainActivity extends Activity {
 
     }
 
-    public void getListViewItem()
-    {
-        for (int i = 0; i < arrayList.size(); i++)
-        {
-            int j;
-            if (countries.equals(arrayList.get(i))){
-                j = 0;
-                j++;
-                Log.i("j = ",j+"");
-            }
-        }
-    }
 }
